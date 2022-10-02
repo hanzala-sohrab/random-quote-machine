@@ -1,23 +1,34 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState, useEffect } from 'react';
 
 function App() {
+  const [quote, setQuote] = useState('');
+  useEffect(() => {
+    getQuotes();
+  }, []);
+  const getQuotes = async () => {
+    const response = await fetch('https://type.fit/api/quotes');
+    const data = await response.json();
+    const randomQuote = data[Math.floor(Math.random() * data.length)];
+    randomQuote.text = randomQuote.text.substring(0, randomQuote.text.length - 1);
+    setQuote(randomQuote);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div className="App-header" id="quote-box">
+        <h4 id="text">{quote.text}</h4>
+        <p id="author">- {quote.author}</p>
+        <button id="new-quote">New quote</button>
         <a
+          id="tweet-quote"
           className="App-link"
-          href="https://reactjs.org"
+          href={`https://www.twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=${quote.text} - ${quote.author}`}
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Tweet
         </a>
-      </header>
+      </div>
     </div>
   );
 }
