@@ -15,7 +15,7 @@ function App() {
   };
   return (
     <div className="App">
-      <div className="App-header" id="quote-box">
+      <div id="quote-box">
         <h4 id="text">{quote.text}</h4>
         <p id="author">- {quote.author}</p>
         <button id="new-quote">New quote</button>
