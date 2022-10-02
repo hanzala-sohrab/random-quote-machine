@@ -24,21 +24,21 @@ function App() {
     <div className="App">
       <div id="quote-box">
         <h4 id="text">{quote.text}</h4>
-        <h6 id="author">- {quote.author}</h6>
-        <div>
+        <h6 id="author">{quote.author}</h6>
+        <div className="clickable">
+          <a
+            id="tweet-quote"
+            className="App-link"
+            href={`https://www.twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=${quote.text} - ${quote.author}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <ion-icon name="logo-twitter"></ion-icon>
+          </a>
           <button id="new-quote" onClick={getQuotes}>
             New quote
           </button>
         </div>
-        <a
-          id="tweet-quote"
-          className="App-link"
-          href={`https://www.twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=${quote.text} - ${quote.author}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Tweet
-        </a>
       </div>
     </div>
   );
