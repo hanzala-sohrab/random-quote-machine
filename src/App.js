@@ -1,24 +1,35 @@
-import './App.css';
-import React, { useState, useEffect } from 'react';
+import "./App.css";
+import quotes from "./quotes.json";
+import React, { useState, useEffect } from "react";
 
 function App() {
-  const [quote, setQuote] = useState('');
+  const [quote, setQuote] = useState("");
   useEffect(() => {
     getQuotes();
   }, []);
   const getQuotes = async () => {
-    const response = await fetch('https://type.fit/api/quotes');
-    const data = await response.json();
-    const randomQuote = data[Math.floor(Math.random() * data.length)];
-    randomQuote.text = randomQuote.text.substring(0, randomQuote.text.length - 1);
+    // const response = await fetch('https://type.fit/api/quotes');
+    // const data = await response.json();
+    // const randomQuote = data[Math.floor(Math.random() * data.length)];
+    // randomQuote.text = randomQuote.text.substring(0, randomQuote.text.length - 1);
+    // setQuote(randomQuote);
+    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+    randomQuote.text = randomQuote.text.substring(
+      0,
+      randomQuote.text.length - 1
+    );
     setQuote(randomQuote);
   };
   return (
     <div className="App">
       <div id="quote-box">
         <h4 id="text">{quote.text}</h4>
-        <p id="author">- {quote.author}</p>
-        <button id="new-quote">New quote</button>
+        <h6 id="author">- {quote.author}</h6>
+        <div>
+          <button id="new-quote" onClick={getQuotes}>
+            New quote
+          </button>
+        </div>
         <a
           id="tweet-quote"
           className="App-link"
